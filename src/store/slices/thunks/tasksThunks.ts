@@ -50,7 +50,7 @@ export const editTask = createAsyncThunk(
 
 export const deleteTask = createAsyncThunk(
 	'tasks/deleteTask',
-	async (targetTask: ITargetTaskDto) => {
+	async (targetTask: Partial<ITargetTaskDto>) => {
 		try {
 			const resposta = await TasksDataService.deleteTask(targetTask)
 			return resposta.data
