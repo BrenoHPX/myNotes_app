@@ -25,7 +25,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppSelector } from '../../store/hooks'
 import { useAppDispatch } from '../../store/hooks'
-import { getAllUsers, logOut } from '../../store/slices/usersSlice'
+import getAllUsers, { logOut } from '../../store/slices/usersSlice'
 import {
 	addTask,
 	archiveTask,
@@ -35,7 +35,7 @@ import {
 	searchTasks,
 	showArchivedTasks,
 	unarchiveTasks
-} from '../../store/slices/tasksSlice'
+} from '../../store/slices/thunks/tasksThunks'
 import { editModeOn, editModeOff } from '../../store/slices/appConfigSlice'
 import { ITargetTaskDto } from '../../interfaces/ITargetTask.dto'
 import ISearchTaskDto from '../../interfaces/ISearchTask.dto'
@@ -57,7 +57,7 @@ const Home: React.FC<Theme> = ({ theme }) => {
 	const [searchInput, setSearchInput] = useState('')
 
 	useEffect(() => {
-		dispatch(getAllUsers())
+		// dispatch(getAllUsers())
 		dispatch(getAllTasks(usuarioLogado?.uUid!))
 	}, [])
 
@@ -86,12 +86,12 @@ const Home: React.FC<Theme> = ({ theme }) => {
 	}
 
 	const deletarTarefa = (msgUid: string) => {
-		dispatch(
-			deleteTask({
-				tUid: msgUid,
-				uUid: usuarioLogado!.uUid
-			} as ITargetTaskDto)
-		)
+		// dispatch(
+		// 	deleteTask({
+		// 		tUid: msgUid,
+		// 		uUid: usuarioLogado!.uUid
+		// 	} as ITargetTaskDto)
+		// )
 	}
 
 	function editarTarefaAlvo(tUid: string) {
