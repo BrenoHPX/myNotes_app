@@ -1,0 +1,10 @@
+@font-face {
+	font-family: 'HelloFlarinda';
+	src: local('freepik'),
+		url(../styles/fonts/hello-flarinda/ttf/hello-flarinda-hello-flarinda-400.ttf)
+			format('truetype');
+}
+
+/* .bla {
+	color:#bebebe, #e9e9e9
+} */
