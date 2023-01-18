@@ -5,12 +5,9 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import Theme from '../../global-types/TTheme'
 import '../../styles/app.css'
 import { BirdImg, myFont } from '../../styles/componentsStyles'
-import {
-	logIn,
-	setSuccessNull,
-	setMessageEmpty
-} from '../../store/slices/usersSlice'
+import { setSuccessNull, setMessageEmpty } from '../../store/slices/usersSlice'
 import { IUser } from '../../interfaces/IUser'
+import { logIn } from '../../store/slices/thunks/usersThunks'
 
 const Login: React.FC<Theme> = ({ theme }) => {
 	const dispatch = useAppDispatch()
@@ -35,13 +32,6 @@ const Login: React.FC<Theme> = ({ theme }) => {
 				dispatch(setMessageEmpty())
 			}, 1000)
 		}
-		if (usersState.success && usersState.message) {
-			setModal(usersState.message)
-			setTimeout(() => {
-				navigate('/home')
-				dispatch(setSuccessNull())
-			}, 1000)
-		}
 	}, [
 		dispatch,
 		navigate,
@@ -51,8 +41,18 @@ const Login: React.FC<Theme> = ({ theme }) => {
 		usersState.success
 	])
 
+	useEffect(() => {
+		if (usersState.loggedUser) {
+			setModal(usersState.message!)
+			setTimeout(() => {
+				navigate('/home')
+				dispatch(setSuccessNull())
+				dispatch(setMessageEmpty())
+			}, 1000)
+		}
+	}, [usersState.loggedUser])
+
 	function verificarLogin() {
-		//verificar preenchimento dos campos
 		if (!email || !senha) {
 			alert('Favor preencher todos os campos.')
 			resetInputs()

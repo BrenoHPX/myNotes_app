@@ -8,6 +8,7 @@ import {
 	getAllTasks,
 	searchTasks,
 	showArchivedTasks,
+	showUnarchivedTasks,
 	unarchiveTasks
 } from './thunks/tasksThunks'
 
@@ -61,6 +62,10 @@ const tasksSlice = createSlice({
 				state.tasks = data
 			})
 			.addCase(showArchivedTasks.fulfilled, (state, action) => {
+				const { data } = action.payload
+				state.tasks = data
+			})
+			.addCase(showUnarchivedTasks.fulfilled, (state, action) => {
 				const { data } = action.payload
 				state.tasks = data
 			})

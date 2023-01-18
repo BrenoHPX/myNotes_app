@@ -34,9 +34,15 @@ import {
 	getAllTasks,
 	searchTasks,
 	showArchivedTasks,
+	showUnarchivedTasks,
+	unarchiveTask,
 	unarchiveTasks
 } from '../../store/slices/thunks/tasksThunks'
-import { editModeOn, editModeOff } from '../../store/slices/appConfigSlice'
+import {
+	editModeOn,
+	editModeOff,
+	setArchivedConfigState
+} from '../../store/slices/appConfigSlice'
 import { ITargetTaskDto } from '../../interfaces/ITargetTask.dto'
 import ISearchTaskDto from '../../interfaces/ISearchTask.dto'
 
@@ -134,11 +140,15 @@ const Home: React.FC<Theme> = ({ theme }) => {
 		dispatch(archiveTask(taskDto))
 	}
 
-	function desarquivarTarefa(uUid: string) {
-		// dispatch(unarchiveTasks(uUid))
-		// dispatch(getAllTasks(usuarioLogado?.uUid!))
-		const msg = tasksState.tasks.find((f) => f.uUid === uUid)
-		alert(`desarquivar ${msg?.title}`)
+	function desarquivarTarefa(tUid: string) {
+		console.log('home/desarquivarTarefa()')
+
+		const taskDto: Partial<ITargetTaskDto> = {
+			tUid,
+			uUid: usuarioLogado?.uUid
+		}
+
+		dispatch(unarchiveTask(taskDto))
 	}
 
 	function desarquivarTarefas(uUid: string) {
@@ -148,6 +158,10 @@ const Home: React.FC<Theme> = ({ theme }) => {
 
 	function mostrarTarefasArquivadas() {
 		dispatch(showArchivedTasks(usuarioLogado?.uUid!))
+	}
+
+	function mostrarTarefasDesarquivadas() {
+		dispatch(showUnarchivedTasks(usuarioLogado?.uUid!))
 	}
 
 	function logout() {
@@ -362,6 +376,16 @@ const Home: React.FC<Theme> = ({ theme }) => {
 					>
 						Tarefas arquivadas
 					</Button>
+
+					<Button
+						color='secondary'
+						startIcon={<MoveToInboxIcon />}
+						sx={{ width: '100%' }}
+						onClick={() => mostrarTarefasDesarquivadas()}
+					>
+						Tarefas não arquivadas
+					</Button>
+
 					<Button
 						color='secondary'
 						startIcon={<UnarchiveIcon />}

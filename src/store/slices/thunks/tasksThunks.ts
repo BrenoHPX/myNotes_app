@@ -66,8 +66,23 @@ export const archiveTask = createAsyncThunk(
 	'tasks/archiveTask',
 	async (targetTask: Partial<ITargetTaskDto>) => {
 		try {
-			console.log('tasksSlice/archiveTasks')
+			console.log('tasksSlice/archiveTask')
 			const resposta = await TasksDataService.archiveTask(targetTask)
+			return resposta.data
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				return error.response!.data
+			}
+		}
+	}
+)
+
+export const unarchiveTask = createAsyncThunk(
+	'tasks/unarchiveTask',
+	async (targetTask: Partial<ITargetTaskDto>) => {
+		try {
+			console.log('tasksSlice/unarchiveTask')
+			const resposta = await TasksDataService.unarchiveTask(targetTask)
 			return resposta.data
 		} catch (error) {
 			if (error instanceof AxiosError) {
@@ -113,6 +128,20 @@ export const showArchivedTasks = createAsyncThunk(
 		try {
 			console.log('tasksSlice/showArchivedTasks')
 			const resposta = await TasksDataService.showArchivedTasks(uUid)
+			return resposta.data
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				return error.response!.data
+			}
+		}
+	}
+)
+export const showUnarchivedTasks = createAsyncThunk(
+	'tasks/showUnarchivedTasks',
+	async (uUid: string) => {
+		try {
+			console.log('tasksSlice/showUnarchivedTasks')
+			const resposta = await TasksDataService.showUnarchivedTasks(uUid)
 			return resposta.data
 		} catch (error) {
 			if (error instanceof AxiosError) {

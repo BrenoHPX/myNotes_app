@@ -36,6 +36,8 @@ export const logIn = createAsyncThunk(
 		try {
 			console.log('usersSlice/logInTry')
 			const resposta = await myNotesService.logIn(user)
+			console.log(resposta.data)
+
 			return resposta.data
 		} catch (error) {
 			if (error instanceof AxiosError) {

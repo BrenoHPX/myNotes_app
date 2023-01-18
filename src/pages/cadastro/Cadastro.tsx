@@ -4,12 +4,10 @@ import { useEffect, useState } from 'react'
 import Theme from '../../global-types/TTheme'
 import { BirdImg } from '../../styles/componentsStyles'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import {
-	addUser,
-	setMessageEmpty,
-	setSuccessNull
-} from '../../store/slices/usersSlice'
+import { addUser } from '../../store/slices/thunks/usersThunks'
+
 import { IUser } from '../../interfaces/IUser'
+import { setMessageEmpty, setSuccessNull } from '../../store/slices/usersSlice'
 
 const Cadastro: React.FC<Theme> = ({ theme }) => {
 	const myFont = 'Marhey'

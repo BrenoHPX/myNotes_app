@@ -20,18 +20,12 @@ class UsersDataServices {
 	}
 
 	async logIn(user: Partial<IUser>) {
+		console.log('POST /users/logIn ')
+
 		return await api.post('/users/logIn', {
 			email: user.email,
 			password: user.password
 		})
-	}
-
-	async editOne(codigo: string) {
-		return await api.put(`/growdever/${codigo}`)
-	}
-
-	async deleteOne(codigo: string) {
-		return await api.delete(`/growdever/${codigo}`)
 	}
 }
 const myNotesService = new UsersDataServices()

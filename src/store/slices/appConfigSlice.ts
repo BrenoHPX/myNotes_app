@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit'
 
 interface IConfigState {
 	editableTask: string | null
+	setArchivedTasks: boolean
 }
 
 const initialState: IConfigState = {
-	editableTask: null
+	editableTask: null,
+	setArchivedTasks: false
 }
 
 const appConfigSlice = createSlice({
@@ -17,10 +19,14 @@ const appConfigSlice = createSlice({
 		},
 		editModeOff: (state) => {
 			state.editableTask = null
+		},
+		setArchivedConfigState: (state, action) => {
+			state.setArchivedTasks = action.payload
 		}
 	},
 	extraReducers() {}
 })
 
 export default appConfigSlice.reducer
-export const { editModeOn, editModeOff } = appConfigSlice.actions
+export const { editModeOn, editModeOff, setArchivedConfigState } =
+	appConfigSlice.actions

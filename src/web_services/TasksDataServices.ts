@@ -39,6 +39,12 @@ class TasksDataServices {
 		)
 	}
 
+	async unarchiveTask(targetTask: Partial<ITargetTaskDto>) {
+		return await api.put(
+			`/users/${targetTask.uUid}/unarchiveTask/${targetTask.tUid}`
+		)
+	}
+
 	async unarchiveTasks(uUid: string) {
 		return await api.put(`/users/${uUid}/unarchiveTasks`)
 	}
@@ -50,6 +56,10 @@ class TasksDataServices {
 	}
 	async showArchivedTasks(uUid: string) {
 		return await api.put(`/users/${uUid}/showArchivedTasks`)
+	}
+
+	async showUnarchivedTasks(uUid: string) {
+		return await api.put(`/users/${uUid}/showUnarchivedTasks`)
 	}
 }
 const TasksDataService = new TasksDataServices()
